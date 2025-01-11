@@ -35,10 +35,10 @@ public class AbrigoController {
         }
     }
 
-    @GetMapping("/{idOuNome}/pets")
-    public ResponseEntity<List<Pet>> listarPets(@PathVariable String idOuNome) {
-
-    }
+//    @GetMapping("/{idOuNome}/pets")
+//    public ResponseEntity<List<Pet>> listarPets(@PathVariable String idOuNome) {
+//
+//    }
 
 //    @PostMapping("/{idOuNome}/pets")
 //    @Transactional
