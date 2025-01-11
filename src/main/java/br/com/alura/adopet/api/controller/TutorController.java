@@ -1,8 +1,8 @@
 package br.com.alura.adopet.api.controller;
 
+import br.com.alura.adopet.api.dto.AtualizacaoTutorDTO;
+import br.com.alura.adopet.api.dto.CadastroTutorDTO;
 import br.com.alura.adopet.api.excpetion.ValidacaoExcpetion;
-import br.com.alura.adopet.api.model.Tutor;
-import br.com.alura.adopet.api.repository.TutorRepository;
 import br.com.alura.adopet.api.service.TutorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +15,27 @@ import org.springframework.web.bind.annotation.*;
 public class TutorController {
 
     @Autowired
-    private TutorService tutorService;
+    private TutorService service;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<String> cadastrar(@RequestBody @Valid Tutor tutor) {
+    public ResponseEntity<String> cadastrar(@RequestBody @Valid CadastroTutorDTO dto) {
         try {
-            tutorService.cadastrar(tutor);
+            service.cadastrar(dto);
             return ResponseEntity.ok().build();
-        } catch (ValidacaoExcpetion err) {
-            return ResponseEntity.badRequest().body(err.getMessage());
+        } catch (ValidacaoExcpetion exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
         }
     }
 
     @PutMapping
     @Transactional
-    public ResponseEntity<String> atualizar(@RequestBody @Valid Tutor tutor) {
-        tutorService.atualizar(tutor);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> atualizar(@RequestBody @Valid AtualizacaoTutorDTO dto) {
+        try {
+            service.atualizar(dto);
+            return ResponseEntity.ok().build();
+        } catch (ValidacaoExcpetion exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
     }
 }
